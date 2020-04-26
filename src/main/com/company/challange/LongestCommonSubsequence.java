@@ -32,6 +32,14 @@ package com.company.challange;
  * DP[i][j] represents the longest common subsequence of text1[0 ... i] & text2[0 ... j].
  * If text1[i] == text2[j] then DP[i][j] = DP[i - 1][j - 1] + 1 , Else DP[i][j] = max(DP[i - 1][j], DP[i][j - 1])
  *
+ *       a c e
+ *   [ 0 0 0 0 ]
+ * a [ 0 1 1 1 ]
+ * b [ 0 1 1 1 ]
+ * c [ 0 1 2 2 ]
+ * d [ 0 1 2 2 ]
+ * e [ 0 1 2 3 ]
+ *
  * Time complexity : O(m * n).
  * Space complexity : O(m * n).
  */
