@@ -9,4 +9,11 @@ public class ArrayUtils {
         }
         System.out.println("]");
     }
+
+    public static void printTwoDimArray(int[][] arr) {
+        for (int[] ints : arr) {
+            printArray(ints);
+        }
+        System.out.println("");
+    }
 }
