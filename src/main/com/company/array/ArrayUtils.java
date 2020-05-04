@@ -16,4 +16,12 @@ public class ArrayUtils {
         }
         System.out.println("");
     }
+
+    public static void printCharArray(char[] arr) {
+        System.out.print("[ ");
+        for (char i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println("]");
+    }
 }

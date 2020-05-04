@@ -26,7 +26,7 @@ package com.company.challenge2;
  * XOR result with original. (0x0=0, 0x1=1, 1x1=0)
  *
  * Time complexity : O(n).
- * Space complexity : O(n).
+ * Space complexity : O(1).
  */
 public class NumberComplement {
 
