@@ -4,10 +4,10 @@ package com.company.challange;
  * Longest Common Subsequence
  * https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3311/
  *
- * Given two strings text1 and text2, return the length of their longest common subsequence.
+ * Given two com.company.strings text1 and text2, return the length of their longest common subsequence.
  * A subsequence of a string is a new string generated from the original string with some characters(can be none)
  * deleted without changing the relative order of the remaining characters. (eg, "ace" is a subsequence of "abcde" while "aec" is not).
- * A common subsequence of two strings is a subsequence that is common to both strings.
+ * A common subsequence of two com.company.strings is a subsequence that is common to both com.company.strings.
  *
  * Input: text1 = "abcde", text2 = "ace"
  * Output: 3
@@ -24,7 +24,7 @@ package com.company.challange;
  * Constraints:
  *     1 <= text1.length <= 1000
  *     1 <= text2.length <= 1000
- *     The input strings consist of lowercase English characters only.
+ *     The input com.company.strings consist of lowercase English characters only.
  *
  * Explanation:
  * Try dynamic programming.
@@ -58,7 +58,7 @@ public class LongestCommonSubsequence {
     }
 
     private int longestCommonSubsequenceSpaceOptimized(String text1, String text2) {
-        // Find lengths of two strings
+        // Find lengths of two com.company.strings
         int m = text1.length(), n = text2.length();
         int[][] L = new int[2][n+1];
         // Binary index, used to index

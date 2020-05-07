@@ -6,7 +6,7 @@ import java.util.Stack;
  * Backspace String Compare
  * https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/529/week-2/3291/
  *
- * Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
+ * Given two com.company.strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
  *
  * 1 <= S.length <= 200
  * 1 <= T.length <= 200

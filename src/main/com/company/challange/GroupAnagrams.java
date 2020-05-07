@@ -6,7 +6,7 @@ import java.util.*;
  * Group Anagrams
  * https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3288/
  *
- * Given an array of strings, group anagrams together.
+ * Given an array of com.company.strings, group anagrams together.
  *
  * Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
  * Output: [

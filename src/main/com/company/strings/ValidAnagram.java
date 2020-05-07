@@ -1,4 +1,4 @@
-package strings;
+package com.company.strings;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Valid Anagram
  * https://leetcode.com/explore/featured/card/top-interview-questions-easy/127/strings/882/
  *
- * Given two strings s and t , write a function to determine if t is an anagram of s.
+ * Given two com.company.strings s and t , write a function to determine if t is an anagram of s.
  *
  * Example 1:
  * Input: s = "anagram", t = "nagaram"
@@ -21,8 +21,8 @@ import java.util.Arrays;
  * What if the inputs contain unicode characters? How would you adapt your solution to such case?
  *
  * Explanation:
- * Convert strings to char arrays and sort them.
- * Compare concatenated strings.
+ * Convert com.company.strings to char arrays and sort them.
+ * Compare concatenated com.company.strings.
  *
  * Time complexity : O(n * log(n) + m * log(m)). x * log(x) - sort time.
  * Space complexity : O(n + m).

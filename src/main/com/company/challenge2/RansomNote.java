@@ -13,7 +13,7 @@ import java.util.*;
  * Each letter in the magazine string can only be used once in your ransom note.
  *
  * Note:
- * You may assume that both strings contain only lowercase letters.
+ * You may assume that both com.company.strings contain only lowercase letters.
  *
  * canConstruct("a", "b") -> false
  * canConstruct("aa", "ab") -> false

@@ -1,4 +1,4 @@
-package strings;
+package com.company.strings;
 
 /**
  * Reverse Integer
