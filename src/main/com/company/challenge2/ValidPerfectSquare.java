@@ -17,10 +17,10 @@ package com.company.challenge2;
  *
  * Explanation:
  * Binary sqr value search for range a to num;
- * ALL start, end, mid and sqrt SHOULD BE LONG because of INT OVERFLOW.
+ * ALL start, end, mid and sqrt SHOULD BE LONG because of INT OVERFLOW!
  *
- * Time complexity : O(n).
- * Space complexity : O(n).
+ * Time complexity : O(n * log(n)).
+ * Space complexity : O(1).
  */
 public class ValidPerfectSquare {
 
