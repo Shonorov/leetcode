@@ -46,7 +46,7 @@ public class OddEvenLinkedList {
         LinkedListUtils.printList(app.oddEvenList(test)); // 1 -> 3 -> 5 -> 2 -> 4 -> NULL
         LinkedListUtils.printList(app.oddEvenList(test2)); // 2 -> 3 -> 6 -> 7 -> 1 -> 5 -> 4 -> NULL
         LinkedListUtils.printList(app.oddEvenList(test3)); // 1 -> 3 -> 5 -> 7 -> 2 -> 4 -> 6 -> NULL
-        LinkedListUtils.printList(app.oddEvenList(null)); // 1 -> 3 -> 5 -> 7 -> 2 -> 4 -> 6 -> NULL
+        LinkedListUtils.printList(app.oddEvenList(null)); // NULL
 
     }
 
