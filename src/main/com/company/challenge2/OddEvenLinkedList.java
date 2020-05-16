@@ -50,7 +50,7 @@ public class OddEvenLinkedList {
 
     }
 
-    private ListNode oddEvenList(ListNode head) {
+    private ListNode oddEvenList2(ListNode head) {
         if (head == null) return null;
         ListNode lastOdd = head;
         ListNode even = head.next;
@@ -66,6 +66,19 @@ public class OddEvenLinkedList {
             even = nextEven;
 
         }
+        return head;
+    }
+
+    private ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+        ListNode oddTail = head, even = head.next, evenHead = even;
+        while (even != null && even.next != null) {
+            oddTail.next = even.next;
+            oddTail = oddTail.next;
+            even.next = oddTail.next;
+            even = even.next;
+        }
+        oddTail.next = evenHead;
         return head;
     }
 }
