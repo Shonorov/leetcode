@@ -1,8 +1,5 @@
 package com.company.challenge2;
 
-import javafx.collections.transformation.SortedList;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
