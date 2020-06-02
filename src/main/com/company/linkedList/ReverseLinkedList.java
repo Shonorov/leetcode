@@ -53,7 +53,7 @@ public class ReverseLinkedList {
         return previous;
     }
 
-    // 1->2->3->4->5->NULL          (head = 4, previous = 5)
+    // 1->2->3->4->5->NULL          (head = 4, previous = 5) (head != null && head.next != null)
     // 1->2->3->4->NULL 5->4->NULL  (head = 3, previous = 5)
     // 1->2->3->NULL 5->4->3->NULL  (head = 2, previous = 5)
     // 1->2->NULL 5->4->3->2->NULL  (head = 1, previous = 5)
@@ -61,7 +61,6 @@ public class ReverseLinkedList {
     private ListNode reverseListRecursive(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode previous = reverseListRecursive(head.next);
-        System.out.println(head.val);
         head.next.next = head;
         head.next = null;
         return previous;
