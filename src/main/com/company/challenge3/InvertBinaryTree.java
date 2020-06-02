@@ -1,4 +1,4 @@
-package com.company.challange3;
+package com.company.challenge3;
 
 import com.company.Trees.TreeNode;
 import com.company.Trees.TreeNodeUtils;
