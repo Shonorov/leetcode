@@ -50,13 +50,10 @@ public class SortColors {
         int zeroIndex = 0, twoIndex = nums.length - 1;
         for (int i = 0; i <= twoIndex; i++) {
             if (nums[i] == 0) {
-                swap(nums, i, zeroIndex);
-                zeroIndex++;
+                swap(nums, i, zeroIndex++);
             }
             if (nums[i] == 2) {
-                swap(nums, i, twoIndex);
-                twoIndex--;
-                i--;
+                swap(nums, i--, twoIndex--);
             }
         }
     }
