@@ -5,6 +5,10 @@ import java.util.*;
 public class TreeNodeUtils {
 
     public static void printTree(TreeNode root) {
+        if (root == null) {
+            System.out.println("NULL");
+            return;
+        }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
