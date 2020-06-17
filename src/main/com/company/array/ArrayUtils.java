@@ -24,4 +24,11 @@ public class ArrayUtils {
         }
         System.out.println("]");
     }
+
+    public static void printTwoDimCharArray(char[][] arr) {
+        for (char[] chars : arr) {
+            printCharArray(chars);
+        }
+        System.out.println("");
+    }
 }
