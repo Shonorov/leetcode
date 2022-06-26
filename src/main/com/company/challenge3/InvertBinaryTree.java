@@ -1,7 +1,7 @@
 package com.company.challenge3;
 
-import com.company.Trees.TreeNode;
-import com.company.Trees.TreeNodeUtils;
+import com.company.trees.TreeNode;
+import com.company.trees.TreeNodeUtils;
 
 /**
  * Invert Binary Tree

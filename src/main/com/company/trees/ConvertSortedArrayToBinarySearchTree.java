@@ -1,8 +1,8 @@
-package com.company.Trees;
+package com.company.trees;
 
 import java.util.Arrays;
 
-import static com.company.Trees.TreeNodeUtils.printTree;
+import static com.company.trees.TreeNodeUtils.printTree;
 
 /**
  * Convert Sorted Array to Binary Search Tree

@@ -1,4 +1,4 @@
-package com.company.Trees;
+package com.company.trees;
 
 /**
  * Validate Binary Search Tree

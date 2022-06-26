@@ -1,6 +1,6 @@
 package com.company.challenge2;
 
-import com.company.Trees.TreeNode;
+import com.company.trees.TreeNode;
 
 import java.util.*;
 

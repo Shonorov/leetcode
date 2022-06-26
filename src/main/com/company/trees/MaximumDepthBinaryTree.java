@@ -1,4 +1,4 @@
-package com.company.Trees;
+package com.company.trees;
 
 /**
  * Maximum Depth of Binary Tree

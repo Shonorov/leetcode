@@ -1,6 +1,6 @@
 package com.company.challenge3;
 
-import com.company.Trees.TreeNode;
+import com.company.trees.TreeNode;
 
 /**
  * Count Complete Tree Nodes
