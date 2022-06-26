@@ -10,6 +10,14 @@ public class ArrayUtils {
         System.out.println("]");
     }
 
+    public static void printBooleanArray(boolean[] arr) {
+        System.out.print("[ ");
+        for (boolean i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println("]");
+    }
+
     public static void printTwoDimArray(int[][] arr) {
         for (int[] ints : arr) {
             printArray(ints);
