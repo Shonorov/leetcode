@@ -72,7 +72,7 @@ public class RomanToInteger {
         for (int i = s.length() - 1; i >= 0 ; i--) {
             int current = letters.get(s.charAt(i));
             int previous = i < s.length() - 1 ? letters.get(s.charAt(i + 1)) : 0;
-            sum += current < previous ? -1 * current : current;
+            sum += current < previous ? -current : current;
         }
         return sum;
     }
