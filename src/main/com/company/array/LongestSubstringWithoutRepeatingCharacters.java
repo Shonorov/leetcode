@@ -35,8 +35,8 @@ import java.util.Set;
  * If array contains index for s.charAt(i), then move start further.
  * Add char index to the array on each iteration.
  *
- * Time complexity : O(log(n)).
- * Space complexity : O(1).
+ * Time complexity : O(n).
+ * Space complexity : O(m). m - the size of the charset
  */
 public class LongestSubstringWithoutRepeatingCharacters {
 
