@@ -96,3 +96,135 @@ WHERE p1.Email = p2.Email AND
 p1.Id > p2.Id
 
 ------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/fix-names-in-a-table/
+-- +----------------+---------+
+-- | Column Name    | Type    |
+-- +----------------+---------+
+-- | user_id        | int     |
+-- | name           | varchar |
+-- +----------------+---------+
+-- Write an SQL query to fix the names so that only the first character is uppercase and the rest are lowercase.
+-- Return the result table ordered by user_id.
+SELECT
+    user_id,
+    CONCAT(UPPER(LEFT(name, 1)), LOWER(SUBSTRING(name, 2, LENGTH(name)))) AS name
+FROM Users
+ORDER BY user_id;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/group-sold-products-by-the-date/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | sell_date   | date    |
+-- | product     | varchar |
+-- +-------------+---------+
+-- Write an SQL query to find for each date the number of different products sold and their names.
+-- The sold products names for each date should be sorted lexicographically.
+-- Return the result table ordered by sell_date.
+SELECT
+    sell_date,
+    COUNT(DISTINCT product) as num_sold,
+    GROUP_CONCAT(DISTINCT product ORDER BY product ASC SEPARATOR ',') AS products
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/patients-with-a-condition/
+-- +--------------+---------+
+-- | Column Name  | Type    |
+-- +--------------+---------+
+-- | patient_id   | int     |
+-- | patient_name | varchar |
+-- | conditions   | varchar |
+-- +--------------+---------+
+-- Write an SQL query to report the patient_id, patient_name all conditions of patients who have Type I Diabetes.
+-- Type I Diabetes always starts with DIAB1 prefix.
+SELECT * FROM Patients WHERE conditions LIKE 'DIAB1%' OR conditions LIKE '% DIAB1%';
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/employees-with-missing-information/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | employee_id | int     |
+-- | name        | varchar |
+-- +-------------+---------+
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | employee_id | int     |
+-- | salary      | int     |
+-- +-------------+---------+
+-- Write an SQL query to report the IDs of all the employees with missing information. The information of an employee is missing if:
+-- - The employee's name is missing, or
+-- - The employee's salary is missing.
+-- Return the result table ordered by employee_id in ascending order.
+SELECT un.employee_id
+FROM
+    (SELECT * FROM Employees LEFT JOIN Salaries USING(employee_id)   --USING instead of ON when column names are the same
+     UNION                                                           --FULL OUTER JOIN analog
+     SELECT * FROM Employees RIGHT JOIN Salaries USING(employee_id)) --USING instead of ON when column names are the same
+        AS un
+WHERE un.name IS NULL OR un.salary IS NULL
+ORDER BY un.employee_id;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/rearrange-products-table/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | product_id  | int     |
+-- | store1      | int     |
+-- | store2      | int     |
+-- | store3      | int     |
+-- +-------------+---------+
+-- Write an SQL query to rearrange the Products table so that each row has (product_id, store, price).
+-- If a product is not available in a store, do not include a row with that product_id and store combination in the result table.
+SELECT product_id, 'store1' AS store, store1 AS price FROM Products WHERE store1 IS NOT NULL
+UNION
+SELECT product_id, 'store2' AS store, store2 AS price FROM Products WHERE store2 IS NOT NULL
+UNION
+SELECT product_id, 'store3' AS store, store3 AS price FROM Products WHERE store3 IS NOT NULL
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/tree-node/
+-- +-------------+------+
+-- | Column Name | Type |
+-- +-------------+------+
+-- | id          | int  |
+-- | p_id        | int  |
+-- +-------------+------+
+-- Each node in the tree can be one of three types:
+-- - "Leaf": if the node is a leaf node.
+-- - "Root": if the node is the root of the tree.
+-- - "Inner": If the node is neither a leaf node nor a root node.
+-- Write an SQL query to report the type of each node in the tree.
+-- Return the result table ordered by id in ascending order.
+SELECT
+    id,
+    'Root' AS type
+FROM Tree WHERE p_id IS NULL
+UNION ALL
+SELECT
+    id,
+    'Inner' AS type
+FROM Tree WHERE p_id IS NOT NULL AND id IN (SELECT DISTINCT p_id FROM Tree)
+UNION ALL
+SELECT
+    id,
+    'Leaf' AS type
+FROM Tree WHERE p_id IS NOT NULL AND id NOT IN (SELECT DISTINCT p_id FROM Tree WHERE p_id IS NOT NULL); -- NOT IN is always false when NULL in array
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/second-highest-salary/
+-- +-------------+------+
+-- | Column Name | Type |
+-- +-------------+------+
+-- | id          | int  |
+-- | salary      | int  |
+-- +-------------+------+
+-- Write an SQL query to report the second highest salary from the Employee table.
+-- If there is no second highest salary, the query should report null.
+SELECT IFNULL((SELECT DISTINCT salary FROM Employee ORDER BY salary DESC LIMIT 1, 1), NULL) AS SecondHighestSalary;
