@@ -228,3 +228,64 @@ FROM Tree WHERE p_id IS NOT NULL AND id NOT IN (SELECT DISTINCT p_id FROM Tree W
 -- Write an SQL query to report the second highest salary from the Employee table.
 -- If there is no second highest salary, the query should report null.
 SELECT IFNULL((SELECT DISTINCT salary FROM Employee ORDER BY salary DESC LIMIT 1, 1), NULL) AS SecondHighestSalary;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/combine-two-tables/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | personId    | int     |
+-- | lastName    | varchar |
+-- | firstName   | varchar |
+-- +-------------+---------+
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | addressId   | int     |
+-- | personId    | int     |
+-- | city        | varchar |
+-- | state       | varchar |
+-- +-------------+---------+
+-- Write an SQL query to report the first name, last name, city, and state of each person in the Person table.
+-- If the address of a personId is not present in the Address table, report null instead.
+SELECT firstName, lastName, city, state
+FROM Person AS p
+LEFT JOIN Address AS a ON p.personId = a.personId;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | visit_id    | int     |
+-- | customer_id | int     |
+-- +-------------+---------+
+-- +----------------+---------+
+-- | Column Name    | Type    |
+-- +----------------+---------+
+-- | transaction_id | int     |
+-- | visit_id       | int     |
+-- | amount         | int     |
+-- +----------------+---------+
+-- Write an SQL query to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+SELECT customer_id, COUNT(v.visit_id) AS 'count_no_trans'
+FROM Visits AS v LEFT JOIN Transactions AS t ON v.visit_id = t.visit_id
+WHERE t.amount IS NULL
+GROUP BY v.customer_id;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/article-views-i/
+-- +---------------+---------+
+-- | Column Name   | Type    |
+-- +---------------+---------+
+-- | article_id    | int     |
+-- | author_id     | int     |
+-- | viewer_id     | int     |
+-- | view_date     | date    |
+-- +---------------+---------+
+-- Write an SQL query to find all the authors that viewed at least one of their own articles.
+-- Return the result table sorted by id in ascending order.
+SELECT DISTINCT author_id AS id FROM Views
+WHERE author_id = viewer_id
+ORDER BY author_id;
+
