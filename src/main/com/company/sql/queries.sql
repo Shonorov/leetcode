@@ -333,3 +333,15 @@ WHERE t1.temperature > t2.temperature
 -- | amount      | int  |
 -- +-------------+------+
 -- Write an SQL query to report the names of all the salespersons who did not have any orders related to the company with the name "RED".
+SELECT DISTINCT sp.name FROM SalesPerson AS sp
+LEFT JOIN Orders AS o ON o.sales_id = sp.sales_id
+WHERE o.order_id IS NULL
+OR sp.sales_id NOT IN
+(SELECT sales_id FROM Orders AS o
+JOIN Company AS c ON c.com_id = o.com_id
+WHERE c.name = 'RED');
+
+SELECT salesperson.name
+FROM orders o JOIN company c ON (o.com_id = c.com_id AND c.name = 'RED')
+RIGHT JOIN salesperson ON salesperson.sales_id = o.sales_id
+WHERE o.sales_id IS NULL;
