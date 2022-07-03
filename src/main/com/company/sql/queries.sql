@@ -289,3 +289,47 @@ SELECT DISTINCT author_id AS id FROM Views
 WHERE author_id = viewer_id
 ORDER BY author_id;
 
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/rising-temperature/
+-- +---------------+---------+
+-- | Column Name   | Type    |
+-- +---------------+---------+
+-- | id            | int     |
+-- | recordDate    | date    |
+-- | temperature   | int     |
+-- +---------------+---------+
+-- Write an SQL query to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+SELECT t1.Id
+FROM Weather t1
+INNER JOIN Weather t2
+ON TO_DAYS(t1.recordDate) = TO_DAYS(t2.recordDate) + 1
+WHERE t1.temperature > t2.temperature
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/sales-person/
+-- +-----------------+---------+
+-- | Column Name     | Type    |
+-- +-----------------+---------+
+-- | sales_id        | int     |
+-- | name            | varchar |
+-- | salary          | int     |
+-- | commission_rate | int     |
+-- | hire_date       | date    |
+-- +-----------------+---------+
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | com_id      | int     |
+-- | name        | varchar |
+-- | city        | varchar |
+-- +-------------+---------+
+-- +-------------+------+
+-- | Column Name | Type |
+-- +-------------+------+
+-- | order_id    | int  |
+-- | order_date  | date |
+-- | com_id      | int  |
+-- | sales_id    | int  |
+-- | amount      | int  |
+-- +-------------+------+
+-- Write an SQL query to report the names of all the salespersons who did not have any orders related to the company with the name "RED".
