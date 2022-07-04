@@ -345,3 +345,50 @@ SELECT salesperson.name
 FROM orders o JOIN company c ON (o.com_id = c.com_id AND c.name = 'RED')
 RIGHT JOIN salesperson ON salesperson.sales_id = o.sales_id
 WHERE o.sales_id IS NULL;
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/user-activity-for-the-past-30-days-i/
+-- +---------------+---------+
+-- | Column Name   | Type    |
+-- +---------------+---------+
+-- | user_id       | int     |
+-- | session_id    | int     |
+-- | activity_date | date    |
+-- | activity_type | enum    |
+-- +---------------+---------+
+-- Write an SQL query to find the daily active user count for a period of 30 days ending 2019-07-27 inclusively.
+-- A user was active on someday if they made at least one activity on that day.
+SELECT activity_date AS day, COUNT( DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date <= STR_TO_DATE('2019-07-27', '%Y-%m-%d')
+AND activity_date > DATE_ADD(STR_TO_DATE('2019-07-27', '%Y-%m-%d'), INTERVAL -30 DAY)
+GROUP BY activity_date
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/daily-leads-and-partners/
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | date_id     | date    |
+-- | make_name   | varchar |
+-- | lead_id     | int     |
+-- | partner_id  | int     |
+-- +-------------+---------+
+-- Write an SQL query that will, for each date_id and make_name, return the number of distinct lead_id's and distinct partner_id's.
+SELECT date_id, make_name, COUNT(DISTINCT lead_id) AS unique_leads, COUNT(DISTINCT partner_id) AS unique_partners
+FROM DailySales
+GROUP BY date_id, make_name
+
+------------------------------------------------------------------------------------------------------------------------
+-- https://leetcode.com/problems/find-followers-count/
+-- +-------------+------+
+-- | Column Name | Type |
+-- +-------------+------+
+-- | user_id     | int  |
+-- | follower_id | int  |
+-- +-------------+------+
+-- Write an SQL query that will, for each user, return the number of followers.
+-- Return the result table ordered by user_id.
+SELECT user_id, COUNT(DISTINCT follower_id) AS followers_count
+FROM Followers
+GROUP BY user_id
