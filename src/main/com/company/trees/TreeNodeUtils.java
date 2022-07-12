@@ -18,4 +18,19 @@ public class TreeNodeUtils {
             if (node.right != null) queue.add(node.right);
         }
     }
+
+    public static void printTree(PerfectTreeNode root) {
+        if (root == null) {
+            System.out.println("NULL");
+            return;
+        }
+        Queue<PerfectTreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            PerfectTreeNode node = queue.poll();
+            System.out.println(node);
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+    }
 }
