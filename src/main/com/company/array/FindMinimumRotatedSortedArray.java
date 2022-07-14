@@ -36,7 +36,9 @@ import static org.junit.Assert.assertEquals;
  * nums is sorted and rotated between 1 and n times.
  *
  * Explanation:
- *
+ * Binary search with exception:
+ * if nums[mid] > nums[right] we go right, otherwise left.
+ * Optimisation: if nums[left] < nums[right], then nums[left] is minimum.
  *
  * Time complexity : O(log(n)).
  * Space complexity : O(1).
