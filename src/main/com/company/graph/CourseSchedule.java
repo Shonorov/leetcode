@@ -1,4 +1,4 @@
-package com.company.challenge2;
+package com.company.graph;
 
 import java.util.ArrayList;
 import java.util.List;

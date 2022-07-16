@@ -1,4 +1,4 @@
-package com.company.challange;
+package com.company.graph;
 
 /**
  * Number of Islands
