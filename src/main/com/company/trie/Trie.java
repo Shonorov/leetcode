@@ -1,8 +1,8 @@
-package com.company.challenge2;
+package com.company.trie;
 
 /**
  * Implement Trie (Prefix Tree)
- * https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3329/
+ * https://leetcode.com/problems/implement-trie-prefix-tree/
  *
  * Implement a trie with insert, search, and startsWith methods.
  *
