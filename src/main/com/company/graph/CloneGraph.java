@@ -1,6 +1,11 @@
 package com.company.graph;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 import static com.company.graph.GraphUtils.printGraph;
 
@@ -39,7 +44,10 @@ import static com.company.graph.GraphUtils.printGraph;
  * The Graph is connected and all nodes can be visited starting from the given node.
  *
  * Explanation:
- *
+ * Traverse all nodes BFS with queue.
+ * Add all existing nodes as map key and create copy nodes as map value.
+ * Add key neighbors as value neighbors.
+ * If current neighbour not visited yet, add it to result and return it back to queue.
  *
  * Time complexity : O(n).
  * Space complexity : O(n).
@@ -57,15 +65,54 @@ public class CloneGraph {
         node3.neighbors = List.of(node4, node2);
         node4.neighbors = List.of(node3, node1);
 
-        printGraph(node1);
-        printGraph(app.cloneGraph(node1));
-        printGraph(app.cloneGraph(new Node(1)));
-        printGraph(app.cloneGraph(null));
+        Node result1 = app.cloneGraph(node1);
+        printGraph(app.cloneGraph(result1)); // [[2,4],[1,3],[2,4],[1,3]]
+        printGraph(app.cloneGraph(new Node(1))); // [[]]
+        printGraph(app.cloneGraph(null)); // []
     }
 
     public Node cloneGraph(Node node) {
-        // TODO
-        return null;
+        if (node == null) return null;
+        HashMap<Node, Node> result = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(node);
+        result.put(node, new Node(node.val, new ArrayList<>()));
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            for (Node neighbor : current.neighbors) {
+                if (!result.containsKey(neighbor)) {
+                    queue.offer(neighbor);
+                    result.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                }
+                result.get(current).neighbors.add(result.get(neighbor));
+            }
+        }
+        return result.get(node);
+    }
+
+    public Node cloneGraphMy(Node node) {
+        if (node == null) return null;
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(node);
+        Map<Integer, Node> nodes = new HashMap<>();
+        Map<Integer, Node> result = new HashMap<>();
+        while (!queue.isEmpty()) {
+            Node current = queue.removeFirst();
+            nodes.put(current.val, current);
+            result.put(current.val, new Node(current.val));
+            for (Node child : current.neighbors) {
+                if (!nodes.containsKey(child.val) && !queue.contains(child)) {
+                    queue.add(child);
+                }
+            }
+        }
+        for (Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+            for (Node copy : entry.getValue().neighbors) {
+                result.get(entry.getKey()).neighbors.add(result.get(copy.val));
+            }
+
+        }
+        return result.get(node.val);
     }
 }
 
