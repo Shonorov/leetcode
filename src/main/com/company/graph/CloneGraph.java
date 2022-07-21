@@ -1,6 +1,5 @@
 package com.company.graph;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,13 +75,13 @@ public class CloneGraph {
         HashMap<Node, Node> result = new HashMap<>();
         Queue<Node> queue = new LinkedList<>();
         queue.offer(node);
-        result.put(node, new Node(node.val, new ArrayList<>()));
+        result.put(node, new Node(node.val));
         while (!queue.isEmpty()) {
             Node current = queue.poll();
             for (Node neighbor : current.neighbors) {
                 if (!result.containsKey(neighbor)) {
                     queue.offer(neighbor);
-                    result.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                    result.put(neighbor, new Node(neighbor.val));
                 }
                 result.get(current).neighbors.add(result.get(neighbor));
             }
