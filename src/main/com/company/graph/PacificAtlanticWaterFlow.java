@@ -1,6 +1,7 @@
 package com.company.graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -48,6 +49,39 @@ public class PacificAtlanticWaterFlow {
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < heights.length; i++) {
+            for (int j = 0; j < heights[0].length; j++) {
+                if (isTop(heights, i, j, true) && isTop(heights, i, j, false)) {
+                    result.add(List.of(i,j));
+                }
+            }
+        }
         return result;
+    }
+
+    private boolean isTop(int[][] heights, int i, int j, boolean toTop) {
+        LinkedList<int[]> coordinates = new LinkedList<>();
+        coordinates.add(new int[]{i,j});
+        while (!coordinates.isEmpty()) {
+            int[] current = coordinates.removeFirst();
+            if (toTop && (current[0] < 0 || current[1] < 0 )) {
+                return true;
+            }
+            if (!toTop && (current[0] >= heights.length || current[1] >= heights[0].length)) {
+                return true;
+            }
+            if (!(current[0] == i && current[1] == j)) {
+                // TODO
+                if ( heights[current[0]][current[1]] >= heights[i][j]) continue;
+            }
+            if (toTop) {
+                coordinates.add(new int[]{current[0] - 1, current[1]});
+                coordinates.add(new int[]{current[0], current[1] - 1});
+            } else {
+                coordinates.add(new int[]{current[0] + 1, current[1]});
+                coordinates.add(new int[]{current[0], current[1] + 1});
+            }
+        }
+        return false;
     }
 }
