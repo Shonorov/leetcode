@@ -1,7 +1,6 @@
 package com.company.graph;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -34,54 +33,55 @@ import static org.junit.Assert.assertEquals;
  * 0 <= heights[r][c] <= 105
  *
  * Explanation:
+ * Start visiting cells for 'pacific' from top line and left line only if next > current height and not visited by 'pacific'.
+ * Then start visiting cells for 'atlantic' from bottom line and right line only if next > current height and not visited by 'atlantic'.
+ * If 'atlantic' already visited by 'pacific' - add to result.
  *
- *
- * Time complexity : O(n).
- * Space complexity : O(n).
+ * Time complexity : O(2 * n * m).
+ * Space complexity : O(n * m).
  */
 public class PacificAtlanticWaterFlow {
 
     public static void main(String[] args) {
         PacificAtlanticWaterFlow app = new PacificAtlanticWaterFlow();
-        assertEquals(List.of(List.of(0,4),List.of(1,3),List.of(1,4),List.of(2,2),List.of(3,0),List.of(3,1),List.of(4,0)), app.pacificAtlantic(new int[][]{{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}));
-        assertEquals(List.of(List.of(0,0),List.of(0,1),List.of(1,0),List.of(1,1)), app.pacificAtlantic(new int[][]{{2,1},{1,2},{2,4,5,3,1}}));
+        assertEquals(List.of(List.of(0,4),List.of(1,4),List.of(1,3),List.of(2,2),List.of(4,0),List.of(3,0),List.of(3,1)), app.pacificAtlantic(new int[][]{{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}));
+        assertEquals(List.of(List.of(0,1),List.of(1,1),List.of(0,0),List.of(1,0)), app.pacificAtlantic(new int[][]{{2,1},{1,2}}));
+        assertEquals(List.of(List.of(0,2),List.of(1,2),List.of(2,2),List.of(2,1),List.of(1,1),List.of(2,0),List.of(1,0)), app.pacificAtlantic(new int[][]{{1,2,3},{8,9,4},{7,6,5}}));
     }
 
+    char[][] visited;
+    List<List<Integer>> result;
+
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
-        List<List<Integer>> result = new ArrayList<>();
+        result = new ArrayList<>();
+        visited = new char[heights.length][heights[0].length];
         for (int i = 0; i < heights.length; i++) {
-            for (int j = 0; j < heights[0].length; j++) {
-                if (isTop(heights, i, j, true) && isTop(heights, i, j, false)) {
-                    result.add(List.of(i,j));
-                }
-            }
+            visit(heights, i, 0, heights[i][0], 'p');
+        }
+        for (int j = 0; j < heights[0].length; j++) {
+            visit(heights, 0, j, heights[0][j], 'p');
+        }
+        for (int i = 0; i < heights.length; i++) {
+            visit(heights, i, heights[0].length - 1, heights[i][heights[0].length - 1], 'a');
+        }
+        for (int j = 0; j < heights[0].length; j++) {
+            visit(heights, heights.length - 1, j, heights[heights.length - 1][j], 'a');
         }
         return result;
     }
 
-    private boolean isTop(int[][] heights, int i, int j, boolean toTop) {
-        LinkedList<int[]> coordinates = new LinkedList<>();
-        coordinates.add(new int[]{i,j});
-        while (!coordinates.isEmpty()) {
-            int[] current = coordinates.removeFirst();
-            if (toTop && (current[0] < 0 || current[1] < 0 )) {
-                return true;
-            }
-            if (!toTop && (current[0] >= heights.length || current[1] >= heights[0].length)) {
-                return true;
-            }
-            if (!(current[0] == i && current[1] == j)) {
-                // TODO
-                if ( heights[current[0]][current[1]] >= heights[i][j]) continue;
-            }
-            if (toTop) {
-                coordinates.add(new int[]{current[0] - 1, current[1]});
-                coordinates.add(new int[]{current[0], current[1] - 1});
-            } else {
-                coordinates.add(new int[]{current[0] + 1, current[1]});
-                coordinates.add(new int[]{current[0], current[1] + 1});
-            }
+    private void visit(int[][] heights, int i, int j, int previous, char direction) {
+        if (i < 0 || j < 0 || i >= heights.length || j >= heights[0].length ||
+                visited[i][j] == direction || previous > heights[i][j]) return;
+
+        if (visited[i][j] == 'p' && direction == 'a') {
+            result.add(List.of(i, j));
         }
-        return false;
+
+        visited[i][j] = direction;
+        visit(heights, i - 1, j, heights[i][j], direction);
+        visit(heights, i + 1, j, heights[i][j], direction);
+        visit(heights, i, j - 1, heights[i][j], direction);
+        visit(heights, i, j + 1, heights[i][j], direction);
     }
 }
